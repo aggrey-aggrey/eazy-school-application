@@ -9,12 +9,13 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-public class ProjectSecurityConfig  {
+public class ProjectSecurityConfig {
 
     /**
      * From Spring Security 5.7, the WebSecurityConfigurerAdapter is deprecated to encourage users
      * to move towards a component-based security configuration. It is recommended to create a bean
      * of type SecurityFilterChain for security related configurations.
+     *
      * @param http
      * @return SecurityFilterChain
      * @throws Exception
@@ -22,11 +23,11 @@ public class ProjectSecurityConfig  {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 
-           // http.csrf().disable()
-        http.csrf().ignoringAntMatchers("/saveMsg")
-                .ignoringAntMatchers("/h2-console/**").and()
+        // http.csrf().disable()
+        http.csrf().ignoringAntMatchers("/saveMsg").and()
                 .authorizeRequests()
                 .mvcMatchers("/dashboard").authenticated()
+                .mvcMatchers("/displayMessages").hasRole("ADMIN")
                 .mvcMatchers("/home").permitAll()
                 .mvcMatchers("/holidays/**").permitAll()
                 .mvcMatchers("/contact").permitAll()
@@ -37,10 +38,9 @@ public class ProjectSecurityConfig  {
                 .and().formLogin().loginPage("/login")
                 .defaultSuccessUrl("/dashboard").failureUrl("/login?error=true").permitAll()
                 .and().logout().logoutSuccessUrl("/login?logout=true").invalidateHttpSession(true).permitAll()
-                .and().authorizeRequests().antMatchers("/h2-console/**").permitAll()
+
                 .and().httpBasic();
 
-        http.headers().frameOptions().disable();
 
         return http.build();
 
@@ -57,11 +57,10 @@ public class ProjectSecurityConfig  {
         UserDetails user = User.withDefaultPasswordEncoder()
                 .username("admin")
                 .password("54321")
-                .roles("USER","ADMIN")
+                .roles("ADMIN")
                 .build();
         return new InMemoryUserDetailsManager(user, admin);
     }
-
 
 
 }

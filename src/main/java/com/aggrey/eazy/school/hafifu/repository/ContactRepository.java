@@ -1,7 +1,7 @@
 package com.aggrey.eazy.school.hafifu.repository;
 
-import com.eazybytes.eazyschool.model.Contact;
-import com.eazybytes.eazyschool.rommappers.ContactRowMapper;
+import com.aggrey.eazy.school.hafifu.model.Contact;
+import com.aggrey.eazy.school.hafifu.rowmappers.ContactRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
@@ -29,15 +29,15 @@ public class ContactRepository {
     }
 
     public int saveContactMsg(Contact contact){
-        String sql = "INSERT INTO CONTACT_MSG (NAME,MOBILE_NUM,EMAIL,SUBJECT,MESSAGE,STATUS," +
-                "CREATED_AT,CREATED_BY) VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "insert into contact_msg (name,mobile_num,email,subject,message,status," +
+                "created_at,created_by) values (?,?,?,?,?,?,?,?)";
         return jdbcTemplate.update(sql,contact.getName(),contact.getMobileNum(),
                 contact.getEmail(),contact.getSubject(),contact.getMessage(),
                 contact.getStatus(),contact.getCreatedAt(),contact.getCreatedBy());
     }
 
     public List<Contact> findMsgsWithStatus(String status) {
-        String sql = "SELECT * FROM CONTACT_MSG WHERE STATUS = ?";
+        String sql = "select * from contact_msg where status = ?";
         return jdbcTemplate.query(sql,new PreparedStatementSetter() {
             public void setValues(PreparedStatement preparedStatement) throws SQLException {
                 preparedStatement.setString(1, status);
@@ -46,7 +46,7 @@ public class ContactRepository {
     }
 
     public int updateMsgStatus(int contactId, String status,String updatedBy) {
-        String sql = "UPDATE CONTACT_MSG SET STATUS = ?, UPDATED_BY = ?,UPDATED_AT =? WHERE CONTACT_ID = ?";
+        String sql = "update contact_msg set status = ?, updated_by = ?,updated_at =? where contact_id = ?";
         return jdbcTemplate.update(sql,new PreparedStatementSetter() {
             public void setValues(PreparedStatement preparedStatement) throws SQLException {
                 preparedStatement.setString(1, status);
@@ -56,5 +56,7 @@ public class ContactRepository {
             }
         });
     }
+
+
 
 }
