@@ -1,9 +1,8 @@
-package com.eazybytes.eazyschool.model;
+package com.aggrey.eazy.school.hafifu.model;
 
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 public class BaseEntity {

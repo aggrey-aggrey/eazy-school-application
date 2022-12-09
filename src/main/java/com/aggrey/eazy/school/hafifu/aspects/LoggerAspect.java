@@ -1,4 +1,4 @@
-package com.eazybytes.eazyschool.aspects;
+package com.aggrey.eazy.school.hafifu.aspects;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -10,14 +10,13 @@ import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.logging.Level;
 
 @Slf4j
 @Aspect
 @Component
 public class LoggerAspect {
 
-    @Around("execution(* com.eazybytes.eazyschool..*.*(..))")
+    @Around("execution(* com.aggrey.eazy.school.hafifu..*.*(..))")
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
         log.info(joinPoint.getSignature().toString() + " method execution start");
         Instant start = Instant.now();
@@ -29,7 +28,7 @@ public class LoggerAspect {
         return returnObj;
     }
 
-    @AfterThrowing(value = "execution(* com.eazybytes.eazyschool.*.*(..))",throwing = "ex")
+    @AfterThrowing(value = "execution(* com.aggrey.eazy.school.hafifu.*.*(..))",throwing = "ex")
     public void logException(JoinPoint joinPoint, Exception ex) {
         log.error(joinPoint.getSignature()+ " An exception happened due to : "+ex.getMessage());
     }

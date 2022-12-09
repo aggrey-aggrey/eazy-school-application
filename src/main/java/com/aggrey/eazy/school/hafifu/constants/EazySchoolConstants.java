@@ -1,4 +1,4 @@
-package com.eazybytes.eazyschool.constants;
+package com.aggrey.eazy.school.hafifu.constants;
 
 public interface EazySchoolConstants {
 

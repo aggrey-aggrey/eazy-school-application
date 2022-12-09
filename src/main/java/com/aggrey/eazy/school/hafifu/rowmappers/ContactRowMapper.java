@@ -1,6 +1,6 @@
 package com.aggrey.eazy.school.hafifu.rowmappers;
 
-import com.eazybytes.eazyschool.model.Contact;
+import com.aggrey.eazy.school.hafifu.model.Contact;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
