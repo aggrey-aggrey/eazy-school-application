@@ -1,8 +1,10 @@
 package com.aggrey.eazy.school.hafifu.model;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
+import javax.persistence.*;
 import javax.validation.constraints.*;
 
 /*
@@ -11,6 +13,8 @@ equals(), hashCode(), toString() methods & Constructor at compile time.
 This makes our code short and clean.
 * */
 @Data
+@Entity
+@Table(name = "contact_msg")
 public class Contact extends BaseEntity {
 
     /*
@@ -18,7 +22,10 @@ public class Contact extends BaseEntity {
       @NotEmpty: Checks if a given field is not null and its size/length is greater than zero.
       @NotBlank: Checks if a given field is not null and trimmed length is greater than zero.
     * */
-
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO,generator="native")
+    @GenericGenerator(name = "native",strategy = "native")
+    @Column(name = "contact_id")
     private int contactId;
 
     @NotBlank(message = "Name must not be blank")
