@@ -3,7 +3,7 @@ package com.aggrey.eazy.school.hafifu.model;
 import com.aggrey.eazy.school.hafifu.annotation.FieldsValueMatch;
 import com.aggrey.eazy.school.hafifu.annotation.PasswordValidator;
 import lombok.Data;
-import org.apache.tomcat.jni.Address;
+import com.aggrey.eazy.school.hafifu.model.Address;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -63,8 +63,8 @@ public class Person extends BaseEntity {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, targetEntity = Roles.class)
     @JoinColumn(name = "role_id", referencedColumnName = "roleId", nullable = false)
     private Roles roles;
-/*
+
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Address.class)
     @JoinColumn(name = "address_id", referencedColumnName = "addressId", nullable = true)
-    private Address address; */
+    private Address address;
 }
