@@ -1,22 +1,30 @@
 package com.aggrey.eazy.school.hafifu.controller;
 
+import com.aggrey.eazy.school.hafifu.model.Address;
 import com.aggrey.eazy.school.hafifu.model.Contact;
 import com.aggrey.eazy.school.hafifu.model.Person;
 import com.aggrey.eazy.school.hafifu.model.Profile;
+import com.aggrey.eazy.school.hafifu.repository.PersonRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
 @Component
 @Controller
 public class ProfileController {
+
+    @Autowired
+    PersonRepository personRepository;
 
     @RequestMapping("/displayProfile")
     public ModelAndView displayProfile(Model model, HttpSession httpSession) {
@@ -38,6 +46,30 @@ public class ProfileController {
         ModelAndView modelAndView = new ModelAndView("profile.html");
         model.addAttribute("profile", profile);
         return modelAndView;
+    }
+
+    @PostMapping(value = "/updateProfile")
+    public String updateProfile(@Valid @ModelAttribute("profile") Profile profile, Errors errors,
+                                HttpSession session)
+    {
+        if(errors.hasErrors()){
+            return "profile.html";
+        }
+        Person person = (Person) session.getAttribute("loggedInPerson");
+        person.setName(profile.getName());
+        person.setEmail(profile.getEmail());
+        person.setMobileNumber(profile.getMobileNumber());
+        if(person.getAddress() ==null || !(person.getAddress().getAddressId()>0)){
+            person.setAddress(new Address());
+        }
+        person.getAddress().setAddress1(profile.getAddress1());
+        person.getAddress().setAddress2(profile.getAddress2());
+        person.getAddress().setCity(profile.getCity());
+        person.getAddress().setState(profile.getState());
+        person.getAddress().setZipCode(profile.getZipCode());
+        Person savedPerson = personRepository.save(person);
+        session.setAttribute("loggedInPerson", savedPerson);
+        return "redirect:/displayProfile";
     }
 
 
