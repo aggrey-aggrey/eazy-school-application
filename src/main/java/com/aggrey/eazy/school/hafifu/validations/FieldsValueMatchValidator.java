@@ -25,6 +25,11 @@ public class FieldsValueMatchValidator
         Object fieldMatchValue = new BeanWrapperImpl(value)
                 .getPropertyValue(fieldMatch);
         if (fieldValue != null) {
+           /*
+           Commenting since we have disable validation by spring data in the application.properties file
+           //we added this code to stop validation of encrypted password  causing password match to fail
+           if(fieldValue.toString().startsWith("$2a"))
+                return  true;*/
             return fieldValue.equals(fieldMatchValue);
         } else {
             return fieldMatchValue == null;
