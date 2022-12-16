@@ -34,6 +34,12 @@ public class DashboardController {
        Person person = personRepository.readByEmail(authentication.getName());
         model.addAttribute("username", person.getName());
         model.addAttribute("roles", authentication.getAuthorities().toString());
+
+        //check if they are  any classes assigned to person  and if it is not null, check the class name
+        if(null != person.getEazyClass() && null != person.getEazyClass().getName()){
+            //assigned the name of the class to UI attribute
+            model.addAttribute("enrolledClass", person.getEazyClass().getName());
+        }
         httpSession.setAttribute("loggedInPerson", person);
         return "dashboard.html";
     }
