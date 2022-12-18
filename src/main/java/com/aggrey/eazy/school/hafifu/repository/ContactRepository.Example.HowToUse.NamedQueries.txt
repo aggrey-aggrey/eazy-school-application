@@ -1,3 +1,7 @@
+/**
+ *  n
+ */
+
 package com.aggrey.eazy.school.hafifu.repository;
 
 import com.aggrey.eazy.school.hafifu.model.Contact;
@@ -18,7 +22,7 @@ type to the Spring context and indicate that given Bean is used to perform
 DB related operations and
 * */
 @Repository
-public interface ContactRepository extends CrudRepository<Contact, Integer> {
+public interface ContactRepositoryWithNamedQueriesAndNativeQueries extends CrudRepository<Contact, Integer> {
 
     List<Contact> findByStatus(String status);
 
@@ -39,6 +43,7 @@ public interface ContactRepository extends CrudRepository<Contact, Integer> {
     @Transactional
     @Modifying
     int updateMsgStatus(String status, int id);
+
 
     @Query(nativeQuery = true)
     Page<Contact> findOpenMsgsNative(@Param("status") String status, Pageable pageable);
