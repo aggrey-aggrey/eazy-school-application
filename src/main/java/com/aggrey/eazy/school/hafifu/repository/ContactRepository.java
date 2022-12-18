@@ -1,6 +1,8 @@
 package com.aggrey.eazy.school.hafifu.repository;
 
 import com.aggrey.eazy.school.hafifu.model.Contact;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,4 +17,6 @@ DB related operations and
 public interface ContactRepository extends CrudRepository<Contact, Integer> {
 
     List<Contact> findByStatus(String status);
+
+    Page<Contact> findByStatus(String status, Pageable pageable);
 }
