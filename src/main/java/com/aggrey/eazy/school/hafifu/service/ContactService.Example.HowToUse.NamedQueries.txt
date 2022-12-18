@@ -1,3 +1,6 @@
+/**
+This is an example of a service class with named and named native queries
+**/
 package com.aggrey.eazy.school.hafifu.service;
 
 import com.aggrey.eazy.school.hafifu.constants.EazySchoolConstants;
@@ -47,20 +50,37 @@ public class ContactService {
     }
 
     public Page<Contact> findMsgsWithOpenStatus(int pageNum, String sortField, String sortDir) {
-        int pageSize = 5;
+        int pageSize =5;
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize,
                 sortDir.equals("asc") ? Sort.by(sortField).ascending()
                         : Sort.by(sortField).descending());
-        Page<Contact> msgPage = contactRepository.findByStatus(
-                EazySchoolConstants.OPEN, pageable);
+        Page<Contact> msgPage = contactRepository.findOpenMsgsNative(
+                EazySchoolConstants.OPEN,pageable);
         return msgPage;
     }
 
     public boolean updateMsgStatus(int contactId) {
         boolean isUpdated = false;
+/**    Now that we have written our custom query, we don't have to load the entity from the database but we can update it directly with our custom query
+ *  Optional<Contact> contact = contactRepository.findById(contactId);
 
-        int rows = contactRepository.updateStatusById(EazySchoolConstants.CLOSE, contactId);
+        contact.ifPresent(contact1 -> {
+            contact1.setStatus(EazySchoolConstants.CLOSE);
+        });
 
+        Contact updatedContact = contactRepository.save(contact.get());
+ **/
+//using -> int rows = contactRepository.updateStatusById(EazySchoolConstants.CLOSE, contactId) -> achieves same results as  int rows = contactRepository.updateMsgStatus(EazySchoolConstants.CLOSE, contactId);
+        //the difference is one has query defined on top of model class while the other in the repository
+
+        int rows = contactRepository.updateMsgStatusNative(EazySchoolConstants.CLOSE, contactId);
+
+        /**we also changed our if statement  code below from
+         *  if (null != updatedContact && updatedContact.getUpdatedBy() != null) {
+         *             isUpdated = true;
+         *         }
+         *         to what is below
+         */
         if (rows > 0) {
             isUpdated = true;
         }
