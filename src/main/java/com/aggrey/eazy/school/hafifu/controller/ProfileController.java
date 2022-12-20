@@ -20,7 +20,7 @@ import java.util.List;
 
 @Slf4j
 @Component
-@Controller
+@Controller("profileControllerBean")
 public class ProfileController {
 
     @Autowired
