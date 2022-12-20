@@ -27,7 +27,7 @@ public class ProjectSecurityConfig {
 
         // http.csrf().disable()
         http.csrf().ignoringAntMatchers("/saveMsg").ignoringAntMatchers("/public/**")
-                .ignoringAntMatchers("/api/**")
+                .ignoringAntMatchers("/api/**") .ignoringAntMatchers("/data-api/**")
                 .and()
                 .authorizeRequests()
                 .mvcMatchers("/dashboard").authenticated()
@@ -38,6 +38,7 @@ public class ProjectSecurityConfig {
                 .mvcMatchers("/admin/**").hasRole("ADMIN")
                 .mvcMatchers("/api/**").authenticated()
                 .mvcMatchers("/home").permitAll()
+                .mvcMatchers("/data-api/**").authenticated()
                 .mvcMatchers("/holidays/**").permitAll()
                 .mvcMatchers("/contact").permitAll()
                 .mvcMatchers("/saveMsg").permitAll()

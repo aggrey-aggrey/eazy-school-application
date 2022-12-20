@@ -2,6 +2,7 @@ package com.aggrey.eazy.school.hafifu.model;
 
 import com.aggrey.eazy.school.hafifu.annotation.FieldsValueMatch;
 import com.aggrey.eazy.school.hafifu.annotation.PasswordValidator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import com.aggrey.eazy.school.hafifu.model.Address;
 import lombok.Getter;
@@ -53,16 +54,19 @@ public class Person extends BaseEntity {
     @NotBlank(message = "Confirm Email must not be blank")
     @Email(message = "Please provide a valid confirm email address")
     @Transient
+    @JsonIgnore
     private String confirmEmail;
 
     @NotBlank(message = "Password must not be blank")
     @Size(min = 5, message = "Password must be at least 5 characters long")
     @PasswordValidator
+    @JsonIgnore
     private String pwd;
 
     @NotBlank(message = "Confirm Password must not be blank")
     @Size(min = 5, message = "Confirm Password must be at least 5 characters long")
     @Transient
+    @JsonIgnore
     private String confirmPwd;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, targetEntity = Roles.class)
