@@ -42,7 +42,6 @@ public class ProjectSecurityConfig {
                 .mvcMatchers("/holidays/**").permitAll()
                 .mvcMatchers("/contact").permitAll()
                 .mvcMatchers("/saveMsg").permitAll()
-                .mvcMatchers("/saveMsg").permitAll()
                 .mvcMatchers("/about").permitAll()
                 .mvcMatchers("/login").permitAll()
                 .mvcMatchers("/public/**").permitAll()
