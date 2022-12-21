@@ -1,5 +1,6 @@
 package com.aggrey.eazy.school.hafifu.service;
 
+import com.aggrey.eazy.school.hafifu.config.EazySchoolProps;
 import com.aggrey.eazy.school.hafifu.constants.EazySchoolConstants;
 import com.aggrey.eazy.school.hafifu.model.Contact;
 import com.aggrey.eazy.school.hafifu.repository.ContactRepository;
@@ -24,6 +25,9 @@ public class ContactService {
     @Autowired
     private ContactRepository contactRepository;
 
+    Autowired
+    EazySchoolProps eazySchoolProps;
+
     public ContactService() {
         System.out.println("Contact Service Bean initialized");
     }
@@ -46,13 +50,16 @@ public class ContactService {
         return isSaved;
     }
 
-    public Page<Contact> findMsgsWithOpenStatus(int pageNum, String sortField, String sortDir) {
-        int pageSize = 5;
+    public Page<Contact> findMsgsWithOpenStatus(int pageNum,String sortField, String sortDir){
+        int pageSize = eazySchoolProps.getPageSize();
+        if(null!=eazySchoolProps.getContact() && null!=eazySchoolProps.getContact().get("pageSize")){
+            pageSize = Integer.parseInt(eazySchoolProps.getContact().get("pageSize").trim());
+        }
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize,
                 sortDir.equals("asc") ? Sort.by(sortField).ascending()
                         : Sort.by(sortField).descending());
         Page<Contact> msgPage = contactRepository.findByStatusWithCustomQuery(
-                EazySchoolConstants.OPEN, pageable);
+                EazySchoolConstants.OPEN,pageable);
         return msgPage;
     }
 
