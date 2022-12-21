@@ -1,5 +1,6 @@
 package com.aggrey.eazy.school.hafifu.security;
 
+import com.aggrey.eazy.school.hafifu.repository.PersonRepository;
 import com.aggrey.eazy.school.hafifu.model.Person;
 import com.aggrey.eazy.school.hafifu.model.Roles;
 import com.aggrey.eazy.school.hafifu.repository.PersonRepository;
@@ -19,14 +20,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@Profile("prod")
-public class EazySchoolUsernamePwdAuthenticationProvider
-        implements AuthenticationProvider {
+@Profile("!prod")
+public class EazySchoolNonProdUsernamePwdAuthenticationProvider
+        implements AuthenticationProvider
+{
     @Autowired
     private PersonRepository personRepository;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public Authentication authenticate(Authentication authentication)
@@ -34,18 +36,17 @@ public class EazySchoolUsernamePwdAuthenticationProvider
         String email = authentication.getName();
         String pwd = authentication.getCredentials().toString();
         Person person = personRepository.readByEmail(email);
-        if (null != person && person.getPersonId() > 0 &&
-                passwordEncoder.matches(pwd, person.getPwd())) {
+        if(null != person && person.getPersonId()>0){
             return new UsernamePasswordAuthenticationToken(
                     email, null, getGrantedAuthorities(person.getRoles()));
-        } else {
+        }else{
             throw new BadCredentialsException("Invalid credentials!");
         }
     }
 
     private List<GrantedAuthority> getGrantedAuthorities(Roles roles) {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + roles.getRoleName()));
+        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_"+roles.getRoleName()));
         return grantedAuthorities;
     }
 
@@ -53,4 +54,5 @@ public class EazySchoolUsernamePwdAuthenticationProvider
     public boolean supports(Class<?> authentication) {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
+
 }
