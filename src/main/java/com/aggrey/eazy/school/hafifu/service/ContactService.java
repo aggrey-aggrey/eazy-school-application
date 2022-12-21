@@ -25,7 +25,7 @@ public class ContactService {
     @Autowired
     private ContactRepository contactRepository;
 
-    Autowired
+    @Autowired
     EazySchoolProps eazySchoolProps;
 
     public ContactService() {
