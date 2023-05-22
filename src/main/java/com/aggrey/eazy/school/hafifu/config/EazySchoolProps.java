@@ -17,8 +17,8 @@ import java.util.Map;
 @Validated
 public class EazySchoolProps {
 
-    @Min(value=5, message="must be between 5 and 25")
-    @Max(value=25, message="must be between 5 and 25")
+    @Min(value = 5, message = "must be between 5 and 25")
+    @Max(value = 25, message = "must be between 5 and 25")
     private int pageSize;
     private Map<String, String> contact;
     private List<String> branches;

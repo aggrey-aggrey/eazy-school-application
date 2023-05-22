@@ -1,7 +1,6 @@
 package com.aggrey.eazy.school.hafifu.model;
 
 import lombok.Data;
-
 import javax.persistence.*;
 
 @Data
