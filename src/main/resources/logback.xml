@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="LOGS" value="C://Users/shemmoz/projects/Java/Spring/Spring-MVC/logs" />
+    <property name="LOGS" value=" C://Users/mtand/Projects/Dev/Java/springboot/logs" />
+    C://Users/mtand/Projects/Dev/Java/springboot/logs
 
     <appender name="Console"
               class="ch.qos.logback.core.ConsoleAppender">
@@ -38,8 +39,8 @@
         <appender-ref ref="Console" />
     </root>
 
-    <!-- LOG "com.aggrey.eay.school.hafifu*" at ERROR level -->
-    <logger name="com.aggrey.eay.school.hafifu" level="error" additivity="false">
+    <!-- LOG "com.aggrey.eazy.school.hafifu*" at ERROR level -->
+    <logger name="com.aggrey.eazy.school.hafifu" level="error" additivity="false">
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />
     </logger>

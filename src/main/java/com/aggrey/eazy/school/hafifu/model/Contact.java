@@ -2,10 +2,13 @@ package com.aggrey.eazy.school.hafifu.model;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.CreditCardNumber;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 
 /*
 @Data annotation is provided by Lombok library which generates getter, setter,

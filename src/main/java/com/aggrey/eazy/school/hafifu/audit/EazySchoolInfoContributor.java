@@ -1,7 +1,7 @@
-package com.eazybytes.eazyschool.audit;
+package com.aggrey.eazy.school.hafifu.audit;
 
-import com.eazybytes.eazyschool.constants.EazySchoolConstants;
-import com.eazybytes.eazyschool.repository.ContactRepository;
+import com.aggrey.eazy.school.hafifu.constants.EazySchoolConstants;
+import com.aggrey.eazy.school.hafifu.audit.EazySchoolInfoContributor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.info.Info;
 import org.springframework.boot.actuate.info.InfoContributor;

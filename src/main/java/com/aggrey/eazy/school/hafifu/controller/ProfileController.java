@@ -1,7 +1,6 @@
 package com.aggrey.eazy.school.hafifu.controller;
 
 import com.aggrey.eazy.school.hafifu.model.Address;
-import com.aggrey.eazy.school.hafifu.model.Contact;
 import com.aggrey.eazy.school.hafifu.model.Person;
 import com.aggrey.eazy.school.hafifu.model.Profile;
 import com.aggrey.eazy.school.hafifu.repository.PersonRepository;
@@ -11,12 +10,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.List;
 
 @Slf4j
 @Component

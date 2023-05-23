@@ -1,6 +1,7 @@
 package com.aggrey.eazy.school.hafifu.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;

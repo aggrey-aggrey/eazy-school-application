@@ -1,6 +1,5 @@
 package com.aggrey.eazy.school.hafifu.controller;
 
-
 import com.aggrey.eazy.school.hafifu.model.Courses;
 import com.aggrey.eazy.school.hafifu.model.EazyClass;
 import com.aggrey.eazy.school.hafifu.model.Person;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import javax.servlet.http.HttpSession;
 import java.util.List;

@@ -3,6 +3,8 @@ package com.aggrey.eazy.school.hafifu.controller;
 import com.aggrey.eazy.school.hafifu.model.Contact;
 import com.aggrey.eazy.school.hafifu.service.ContactService;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Slf4j
 @Controller
 public class ContactController {
+    Logger logger = LoggerFactory.getLogger("ConctactController.class");
+
 
     private final ContactService contactService;
 
@@ -52,7 +56,7 @@ public class ContactController {
     @RequestMapping(value = "/saveMsg", method = POST)
     public String saveMessage(@Valid @ModelAttribute("contact") Contact contact, Errors errors) {
         if (errors.hasErrors()) {
-            log.error("Contact form validation failed due to : " + errors.toString());
+            logger.error("Contact form validation failed due to : " + errors.toString());
             return "contact.html";
         }
         contactService.saveMessageDetails(contact);

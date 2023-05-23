@@ -3,11 +3,11 @@ package com.aggrey.eazy.school.hafifu.model;
 import com.aggrey.eazy.school.hafifu.annotation.FieldsValueMatch;
 import com.aggrey.eazy.school.hafifu.annotation.PasswordValidator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import com.aggrey.eazy.school.hafifu.model.Address;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
