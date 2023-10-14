@@ -1,7 +1,7 @@
 pipleline {
 
             environment {
-            GITHUB_ORG = 'aggrey-org'
+            GITHUB_ORG = 'aggreys-org'
             CONTAINER_REGISTRY = "ghcr.io/${GITHUB_ORG}"
             ARTIFACT_ID = readMavenPom().getArtifactId()
             JAR_NAME = "${ARTIFACT_ID}-${BUILD_NUMBER}"
