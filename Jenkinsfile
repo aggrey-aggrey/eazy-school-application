@@ -9,12 +9,19 @@ pipleline {
 
             }
 
-            agent any
+            agent{
+                docker {
+                image "openjdk:17"
+                reuseNode true
+
+                }
+            }
 
             stages{
                     stage('Build Application'){
                         steps {
                                 sh 'echo Performing Maven Build: ${ARTIFACT_ID}'
+                                sh './mvmw -DjarName=${JAR_NAME} clean verify'
 
                         }
 
