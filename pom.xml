@@ -112,7 +112,8 @@
     </dependencies>
 
     <build>
-        <finalName>${}</finalName>
+        <!--suppress UnresolvedMavenProperty -->
+        <finalName>${jarName}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
