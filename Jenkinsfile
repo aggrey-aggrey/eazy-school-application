@@ -1,4 +1,4 @@
-pipleline {
+pipeline {
 
             environment {
             GITHUB_ORG = 'aggreys-org'
