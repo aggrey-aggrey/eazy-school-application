@@ -25,7 +25,6 @@ pipeline {
                                 sh 'echo Performing Maven Build: ${ARTIFACT_ID}'
                                 sh 'mvn -DjarName=${JAR_NAME} clean verify'
                                 sh 'docker build --build-arg JAR_FILE=${JAR_LOCATION} -t ${IMAGE_TAG} .'
-'
 
                         }
 
