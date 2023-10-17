@@ -1,4 +1,5 @@
 pipeline {
+            agent any
 
             environment {
             GITHUB_ORG = 'aggreys-org'
