@@ -15,6 +15,7 @@ pipeline {
 
             stages{
                     stage('Build Application'){
+
                        agent{
                               docker {
                                     image 'openjdk:17'
@@ -25,7 +26,6 @@ pipeline {
                         steps {
                                 sh 'echo Performing Maven Build: ${ARTIFACT_ID}'
                                 sh 'mvn -DjarName=${JAR_NAME} clean verify'
-                                sh 'docker build --build-arg JAR_FILE=${JAR_LOCATION} -t ${IMAGE_TAG} .'
 
                         }
 
@@ -34,6 +34,7 @@ pipeline {
                     stage('Build Container Image'){
                                             steps {
                                                     sh 'echo Building a Container Image: ${IMAGE_NAME}'
+                                                    sh 'docker build --build-arg JAR_FILE=${JAR_LOCATION} -t ${IMAGE_TAG} .'
 
                                             }
 
